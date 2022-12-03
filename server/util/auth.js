@@ -1,6 +1,10 @@
-const
+const db = require("./db.js");
 
-//check password
-function checkPassword( password ) {
 
+//!login
+async function login (lst, pwd) {
+	let user = await db.login(lst, pwd);
+	
 }
+
+//check auth (for roster)
