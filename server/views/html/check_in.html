@@ -4,16 +4,32 @@
 	<title></title>
 </head>
 <body>
-
+	<span id="time"> </span>
 	<!-- This is the login box, make it look like one. -->
 	<div id="login box">
 		<form>
 			<label for="name">Name:</label>
 			<input type="text" name="name">
+			
 			<label for="secret">PIN</label>
 			<input type="password" name="secret">
 		</form>
 	</div>
+
+	<script type="text/javascript" async>
+		`use strict`
+	   var datetime = new Date();
+	   console.log(datetime);
+	   document.getElementById("time").textContent = datetime; //it will print on html page
+	   
+	   function refreshTime() {
+	   const timeDisplay = document.getElementById("time");
+	   const dateString = new Date().toLocaleString();
+	   const formattedString = dateString.replace(", ", " - ");
+	   timeDisplay.textContent = formattedString;
+	   }
+	   setInterval(refreshTime, 1000);
+   </script>
 
 </body>
 </html>
