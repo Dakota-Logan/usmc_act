@@ -2,8 +2,11 @@ const db = require("./db.js");
 
 //todo! Check for auth headers
 
-//todo! Set auth headers
 
+//todo! Set auth headers
+async function setAuth( params ) {
+
+}
 
 //!login
 async function login (lst, pwd) {
