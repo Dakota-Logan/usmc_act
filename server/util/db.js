@@ -7,7 +7,7 @@ const pgp = require('pg-promise')(/* options */),
 class deltaBravo {
 	constructor() {
 		//* Connect to the database with the interface.
-		private this.db = pgp(cn);
+		this.#db = pgp(cn);
 	}
 	
 	//? This is a parameterized query, which runs the variables as parameters so any hidden injection wont be run as postgres code. Neat lil feature I just found.
@@ -16,8 +16,8 @@ class deltaBravo {
 	
 	async login( lst, pwd ) {
 		try {
-			let req = pq({ text: "SELECT * FROM user_tracker WHERE first = $1 AND pwd = $2", values: [ lst, pwd ] });
-			return await db.one(req);
+			let req = this.#pq({ text: "SELECT * FROM user_tracker WHERE first = $1 AND pwd = $2", values: [ lst, pwd ] });
+			return await this.#db.one(req);
 		} catch (e) {
 			throw 110;
 		}
@@ -25,7 +25,7 @@ class deltaBravo {
 	
 	async check_in( id ) {
 		try {
-			let req = new this.#pq({ text: "UPDATE user_tracker SET in = true WHERE id = $1", values: [id] });
+			let req = new this.#pq({ text: "UPDATE user_tracker SET in = true,  WHERE id = $1", values: [id] });
 			return await this.db.one(req);
 		} catch (e) {
 			throw 111;
@@ -34,7 +34,7 @@ class deltaBravo {
 	
 	async check_out( id, reason ) {
 		try {
-			let req = this.#pq({ text: "UPDATE user_tracker " });//todo insert query
+			let req = this.#pq({ text: "UPDATE user_tracker SET in = false, reason = $2, WHERE id = $1", values: [id, reason] });
 			return await this.db.one
 		} catch (e) {
 			throw 112;

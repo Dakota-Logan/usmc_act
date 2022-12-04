@@ -1,5 +1,6 @@
-let express = require('express');
-let router  = express.Router();
+const express = require('express'),
+	  router  = express.Router(),
+	  db = require("./db.js");
 
 let path = require("path");
 
