@@ -1,7 +1,7 @@
 All exceptions/errors sent by the server will maintain a code of some sort, no matter what. These are the codes you
 should expect so you can tell the user to fix it themselves!
 
-11* - bad credentials.
+11* - bad credentials/authorization (not allowed in)
 	110 - login
 	111 - check in
 	112 - check out

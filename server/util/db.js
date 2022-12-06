@@ -1,10 +1,11 @@
 //* Database interface library. EZ BreZ
 const pgp = require('pg-promise')(/* options */),
 	  //* Database connection received from an environment variable.
-	  cn  = pgp(process.env.database);
+	  cn  = pgp(process.env["db"]);
 
 //* Using a class to easily export into other file for use, good practice with classes.
 class deltaBravo {
+	#db;
 	constructor() {
 		//* Connect to the database with the interface.
 		this.#db = pgp(cn);
@@ -51,4 +52,4 @@ class deltaBravo {
 	
 }
 
-Module.exports = new deltaBravo();
+module.exports = new deltaBravo();

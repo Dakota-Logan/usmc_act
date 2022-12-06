@@ -1,6 +1,6 @@
 const express = require('express'),
 	  router  = express.Router(),
-	  db      = require("./db.js"),
+	  // db      = require("./db.js"),
 	  path    = require("path");
 
 router.get('/', ( req, res, next ) => {
