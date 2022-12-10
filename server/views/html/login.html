@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<link rel="stylesheet" href="../../public/stylesheets/login.css">
+	<title>Login</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<div class="topnav" id="myTopnav">
+		<a href="home.html" class="active">Home</a>
+		<a href="admin.html">Admin</a>
+		<a href="index.html" class="logout">Logout</a>
+		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+		  <i class="fa fa-bars"></i>
+		</a>
+	  </div>
 </head>
 <body>
 	<span id="time"> </span>
@@ -11,7 +22,7 @@
 			<label for="name">Name:</label>
 			<input type="text" name="name">
 			
-			<label for="secret">PIN</label>
+			<label for="secret">Password</label>
 			<input type="password" name="secret">
 		</form>
 	</div>
@@ -30,6 +41,5 @@
 	   }
 	   setInterval(refreshTime, 1000);
    </script>
-
 </body>
 </html>
