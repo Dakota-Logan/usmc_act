@@ -6,6 +6,7 @@ const pgp = require('pg-promise')(/* options */),
 //* Using a class to easily export into other file for use, good practice with classes.
 class deltaBravo {
 	#db;
+	
 	constructor() {
 		//* Connect to the database with the interface.
 		this.#db = pgp(cn);
@@ -15,16 +16,16 @@ class deltaBravo {
 	#pq = require('pg-promise').ParameterizedQuery;
 	
 	
-	async login( lst, pwd ) {
+	async login(lst, pwd) {
 		try {
-			let req = this.#pq({ text: "SELECT * FROM user_tracker WHERE first = $1 AND pwd = $2", values: [ lst, pwd ] });
+			let req = this.#pq({ text: "SELECT * FROM user_tracker WHERE first = $1 AND pwd = $2", values: [lst, pwd] });
 			return await this.#db.one(req);
 		} catch (e) {
 			throw 110;
 		}
 	}
 	
-	async check_in( id ) {
+	async check_in(id) {
 		try {
 			let req = new this.#pq({ text: "UPDATE user_tracker SET in = true,  WHERE id = $1", values: [id] });
 			return await this.db.one(req);
@@ -33,7 +34,7 @@ class deltaBravo {
 		}
 	}
 	
-	async check_out( id, reason ) {
+	async check_out(id, reason) {
 		try {
 			let req = this.#pq({ text: "UPDATE user_tracker SET in = false, reason = $2, WHERE id = $1", values: [id, reason] });
 			return await this.db.one
@@ -50,6 +51,9 @@ class deltaBravo {
 		}
 	}
 	
+	async retrieveHash(id) {
+		//todo need [hash, salt, iter]
+	}
 }
 
 module.exports = new deltaBravo();

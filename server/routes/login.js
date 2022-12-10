@@ -4,8 +4,11 @@ const express = require('express'),
 
 let path = require("path");
 
+router.use(req => console.log(req.body));
+
 /* GET home page. */
 router.get('/', (req, res, next) => {
+	
 	res.sendFile(path.join(__dirname + "/../views/html/home.html"));
 });
 
