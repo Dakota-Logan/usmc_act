@@ -9,7 +9,8 @@ const loginRouter  = require("./routes/login"),
 	  statusRouter = require("./routes/check_in"),
 	  rosterRouter = require("./routes/roster");
 
-const auth = require("./util/auth");
+const auth = require("./util/auth"),
+	  jwt  = require("./util/jwt_utils");
 
 
 let app = express();
@@ -29,19 +30,31 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(parser.urlencoded({ extended: false }))
 app.use(parser.json())
 
-app.use(req => console.log(req.body))
+app.use((req, res, next) => {
+	let token = req.cookies.token | false;
+	if (token) {
+		if (jwt.verifyToken(token)) {
+			//* Get and set the important information into the body of the request.
+			let dToken              = jwt.decodeToken(token);
+			req.body.clearanceLevel = dToken.clearanceLevel;
+			req.body.userId         = dToken.id;
+			
+			//* Redirect to status page as jwt is legitimate.
+			res.redirect("/status");
+		}
+	} else {
+		next()
+	}
+});
 //TODO Add middleware to check for jwt and authenticate, if good - add flair on req body to signal the rest all the way down.
 
 
 //?TODO Add middleware to replace signed JWT with a decoded JWT object for ease of use through the routes.
 
-//? Test route
-app.use("/test/:id", require("./routes/tesat"));
-
 //* ROUTES
 app.use("/", loginRouter);
-app.use("/status/:id", statusRouter);
-app.use("/roster", rosterRouter);
+app.use("/status", statusRouter);
+app.use("/roster", ((req, res, next) => {if (req.body.clearanceLevel < 3) throw new Error().status = 113 else next()}), rosterRouter);
 
 //?TODO Add middleware to re-sign jwt.
 
@@ -51,7 +64,7 @@ app.use((req, res, next) => {
 });
 
 //* error handler
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
 	// set locals, only providing error in development
 	res["locals"].message = err.message;
 	res["locals"].error   = req.app.get("env") === "development" ? err : {};

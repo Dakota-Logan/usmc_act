@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CodeComments" version="1">
-    <comments>
-      <comment>
-        <place from="846" to="972">
-          <path mode="project">server/app.js</path>
-        </place>
-        <text>//TODO Add middleware to check for jwt and authenticate, if good - add flair on req body to signal the rest all the way down.</text>
-        <data>THE MIDDLEWARE TO CHECK FOR JWT SHOULD ADD A FLAIR WITH A HASH ONLY KNOW SERVER SIDE (AND STORED ENV) SO THAT THE CLIENT CANNOT JUST CREATE THEIR OWN.</data>
-      </comment>
-    </comments>
+    <comments />
   </component>
 </project>
