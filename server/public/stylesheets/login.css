@@ -5,178 +5,72 @@
 #DAF7A6
 #FFC300
 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #4d6166;
 }
-body{
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(120deg,#4d6166, #273746);
-  height: 100vh;
-  overflow: hidden;
+
+#register {
+  width: 400px;
 }
-.center{
+
+#register2 {
+  width: 500px;
+}
+
+#register2 p {
+  margin-top: 20px;
+}
+#loginbox{     
+  width: auto;
+  height: auto;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
-  padding-bottom: 10px;
-}
-.center h1{
-  text-align: center;
-  padding: 20px 0;
-  border-bottom: 1px solid silver;
-}
-.center form{
-  padding: 0 40px;
-  box-sizing: border-box;
-}
-form .txt_field{
-  position: relative;
-  border-bottom: 2px solid #adadad;
-  margin: 30px 0;
-}
-.txt_field input{
-  width: 100%;
-  padding: 0 5px;
-  height: 40px;
-  font-size: 16px;
-  border: none;
-  background: none;
-  outline: none;
-}
-.txt_field label{
-  position: absolute;
-  top: 50%;
-  left: 5px;
-  color: #adadad;
-  transform: translateY(-50%);
-  font-size: 16px;
-  pointer-events: none;
-  transition: .5s;
-}
-.txt_field span::before{
-  content: '';
-  position: absolute;
-  top: 40px;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background: #2691d9;
-  transition: .5s;
-}
-.txt_field input:focus ~ label,
-.txt_field input:valid ~ label{
-  top: -5px;
-  color: #2691d9;
-}
-.txt_field input:focus ~ span::before,
-.txt_field input:valid ~ span::before{
-  width: 100%;
-}
-.pass{
-  margin: -5px 0 20px 5px;
-  color: #a6a6a6;
-  cursor: pointer;
-}
-.pass:hover{
-  text-decoration: underline;
-}
-input[type="submit"]{
-  width: 100%;
-  height: 50px;
-  border: 1px solid;
-  background: #2691d9;
-  border-radius: 25px;
-  font-size: 18px;
-  color: #e9f4fb;
-  font-weight: 700;
-  cursor: pointer;
-  outline: none;
-}
-input[type="submit"]:hover{
-  border-color: #2691d9;
-  transition: .5s;
-}
-.signup_link{
-  margin: 30px 0;
-  text-align: center;
-  font-size: 16px;
-  color: #666666;
-}
-.signup_link a{
-  color: #2691d9;
-  text-decoration: none;
-}
-.signup_link a:hover{
-  text-decoration: underline;
-}
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  margin-top: -100px;  
+  margin-left: -150px;
 }
 
-.topnav {
-  overflow: hidden;
-  background-color: #333;
-}
-
-.topnav a {
-  float: left;
+input {
+  color: #DAF7A6;
+  padding: 3px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 300px;
   display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
+label {
+  color: #FFC300;
+  font-weight: bold;
+  display: block;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80px;
+}
+label:after { content: ": " }
+
+#button {
+  padding: 10px;
+  border: 1px solid gray;
+  background-color:#B4886B;
+  border-radius: 5px;
+  font: inherit;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80px;
 }
 
-.topnav a.active {
-  background-color: #04AA6D;
+#button:focus {
+  outline: 2px solid gray;
+  font-weight: bold;
   color: white;
 }
-
-.topnav .icon {
-  display: none;
-}
-/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
-@media screen and (max-width: 600px) {
-  .topnav a:not(:first-child) {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-}
-.topnav .logout{
-    padding-right: 30px;
-    float: right;
-    display: block;
-}
-
-/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
-@media screen and (max-width: 600px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive a.icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
+#button:hover {
+  background-color: #1ad409;
+  box-shadow: 3px 3px 5px grey;
 }
