@@ -43,10 +43,10 @@ app.use((req, res, next) => {
 			res.redirect("/status");
 		}
 	} else {
+		console.log("no jwt") //todo!
 		next()
 	}
 });
-//TODO Add middleware to check for jwt and authenticate, if good - add flair on req body to signal the rest all the way down.
 
 
 //?TODO Add middleware to replace signed JWT with a decoded JWT object for ease of use through the routes.
@@ -54,7 +54,9 @@ app.use((req, res, next) => {
 //* ROUTES
 app.use("/", loginRouter);
 app.use("/status", statusRouter);
-app.use("/roster", ((req, res, next) => {if (req.body.clearanceLevel < 3) throw new Error().status = 113 else next()}), rosterRouter);
+app.use("/roster", ((req, res, next) => {
+	if (req.body.clearanceLevel < 3) throw { code: 113 }; else next()
+}), rosterRouter);
 
 //?TODO Add middleware to re-sign jwt.
 
