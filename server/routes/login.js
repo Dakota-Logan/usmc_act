@@ -2,14 +2,18 @@ const express = require('express'),
 	  router  = express.Router()
 	  // db      = require("./db.js");
 
-let path = require("path");
+let path = require("path"),
+	curPath = __dirname + "/../views/html/";
 
-router.use(req => console.log(req.body));
+router.use((req, res, next) => {
+	console.log(req.body);
+	next()
+});
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
 	console.log("in login GET")
-	res.sendFile(path.join(__dirname + "/../views/html/home.html"));
+	res.sendFile(path.join(curPath+"home.html"));
 });
 
 //todo Add the pathing that pushes admin users to the roster page immediately.
