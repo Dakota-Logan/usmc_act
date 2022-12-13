@@ -1,0 +1,76 @@
+/*SECONDARY background color hex: #4d6166
+#2e4053
+#273746
+#4d6166
+#DAF7A6
+#FFC300
+*/
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #4d6166;
+}
+
+#register {
+  width: 400px;
+}
+
+#register2 {
+  width: 500px;
+}
+
+#register2 p {
+  margin-top: 20px;
+}
+#loginbox{     
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;  
+  margin-left: -150px;
+}
+
+input {
+  color: #DAF7A6;
+  padding: 3px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+label {
+  color: #FFC300;
+  font-weight: bold;
+  display: block;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80px;
+}
+label:after { content: ": " }
+
+#button {
+  padding: 10px;
+  border: 1px solid gray;
+  background-color:#B4886B;
+  border-radius: 5px;
+  font: inherit;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80px;
+}
+
+#button:focus {
+  outline: 2px solid gray;
+  font-weight: bold;
+  color: white;
+}
+#button:hover {
+  background-color: #1ad409;
+  box-shadow: 3px 3px 5px grey;
+}
