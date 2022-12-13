@@ -1,0 +1,18 @@
+All exceptions/errors sent by the server will maintain a code of some sort, no matter what. These are the codes you
+should expect so you can tell the user to fix it themselves!
+
+ 11* - bad credentials/authorization (not allowed in)
+	110 - login
+	111 - check in
+	112 - check out
+	113 - roster
+19* - misc. errors
+	192 - failure to create jwt*
+	193 - failure to set cookie**
+	194 - could not decode JWT
+	195 - not authorized
+	196 - not authenticated
+
+
+* Should still work, will just have to send credentials on every request (security risk).
+** Same as above for JWT, will infill when used for something else.
