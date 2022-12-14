@@ -5,16 +5,12 @@ const express = require('express'),
 let path = require("path"),
 	curPath = __dirname + "/../views/html/";
 
-router.use((req, res, next) => {
-	console.log(req.body);
-	next()
-});
-
 /* GET home page. */
 router.get('/', (req, res, next) => {
 	console.log("in login GET")
-	res.sendFile(path.join(curPath+"home.html"));
+	res.sendFile(path.join(curPath+"login.html"));
 });
+
 
 //todo Add the pathing that pushes admin users to the roster page immediately.
 router.post("/", (req, res, next) => {
@@ -24,6 +20,12 @@ router.post("/", (req, res, next) => {
 	//check for user and auth
 	//return good jwt
 	//return no_user error
+});
+
+//CSS
+router.get('/login.css', function(req, res) {
+	console.log("css path")
+	res.sendFile(path.join(curPath+"../../public/stylesheets/login.css"));
 });
 
 module.exports = router;

@@ -51,6 +51,8 @@ app.use((req, res, next) => {
 
 //?TODO Add middleware to replace signed JWT with a decoded JWT object for ease of use through the routes.
 
+app.use((req => console.log(req.body)));
+
 //* ROUTES
 app.use("/", loginRouter);
 app.use("/status", statusRouter);

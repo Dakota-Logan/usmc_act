@@ -1,9 +1,11 @@
 const express = require('express'),
-	  router  = express.Router(),
-	  path    = require("path");
+	  router  = express.Router();
 
-router.get('/', ( req, res, next ) => {
-	res.sendFile(path.join(__dirname + "/../views/html/home.html"));
+let path      = require("path"),
+	curPath   = __dirname + "/../views/html/";
+
+router.get('/', (req, res, next) => {
+	res.sendFile(path.join(curPath+"checkin.html"));
 });
 
 

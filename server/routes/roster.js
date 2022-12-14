@@ -1,10 +1,12 @@
 const express = require('express'),
-	  router  = express.Router(),
+	  router  = express.Router();
 	  // db      = require("./db.js"),
-	  path    = require("path");
+
+let path = require("path"),
+	curPath = __dirname + "/../views/html/";
 
 router.get('/', ( req, res, next ) => {
-	res.sendFile(path.join(__dirname + "./../views/html/roster.html"));
+	res.sendFile(path.join(curPath+"roster.html"));
 });
 
 module.exports = router;
