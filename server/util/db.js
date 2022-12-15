@@ -16,9 +16,10 @@ class deltaBravo {
 	#pq = require('pg-promise').ParameterizedQuery;
 	
 	
-	async login(lst, pwd) {
+	async login(name, pwd) {
 		try {
-			let req = this.#pq({ text: "SELECT * FROM user_tracker WHERE first = $1 AND pwd = $2", values: [lst, pwd] });
+			let nm = name.split(".");
+			let req = this.#pq({ text: "SELECT * FROM user_tracker WHERE first = $1 AND last = $2 AND pwd = $3", values: [nm[0], nm[1], pwd] });
 			return await this.#db.one(req);
 		} catch (e) {
 			throw 110;

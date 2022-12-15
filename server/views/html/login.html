@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="/login.css">
+	<link rel="stylesheet" href="/stylesheets/login.css">
 	<title>Login</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
@@ -17,8 +17,8 @@
 <body>
 <span id="time"> </span>
 <!-- This is the login box, make it look like one. -->
-<div id="loginbox">
-	<form onsubmit="login(name.value, secret.value)">
+<div id="login_box">
+	<form id="login_form">
 		<label for="name">Name</label>
 		<input type="text" name="name" id="name" placeholder="Username">
 		
@@ -31,9 +31,9 @@
 
 <script type="text/javascript" async>
 	`use strict`
-	var datetime = new Date();
+	let datetime = new Date();
 	console.log(datetime);
-	document.getElementById("time").textContent = datetime; //it will print on html page
+	document.getElementById("time").textContent = datetime.toDateString(); //it will print on html page
 	
 	function refreshTime() {
 		const timeDisplay       = document.getElementById("time");
@@ -44,12 +44,18 @@
 	
 	setInterval(refreshTime, 1000);
 	
-	function login (username, password) {
+	document.getElementById("login_form").addEventListener("submit", login, true);
+	function login (e) {
+		e.preventDefault();
+		let vals = e.target.elements;
 		fetch("/", {
 			method: "POST",
+			headers: {
+				'Content-Type': 'application/json'
+			},
 			body: JSON.stringify({
-				username: username,
-				password: password
+				username: vals.name.value,
+				password: vals.password.value
 			})
 		});
 	}

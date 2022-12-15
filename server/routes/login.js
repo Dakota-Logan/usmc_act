@@ -1,6 +1,6 @@
 const express = require('express'),
 	  router  = express.Router()
-	  // db      = require("./db.js");
+	  db      = require("../util/db.js");
 
 let path = require("path"),
 	curPath = __dirname + "/../views/html/";
@@ -13,19 +13,20 @@ router.get('/', (req, res, next) => {
 
 
 //todo Add the pathing that pushes admin users to the roster page immediately.
-router.post("/", (req, res, next) => {
-	let email = req.body.email,
+router.post("/", async (req, res, next) => {
+	console.log("in login POST")
+	console.log(req.body)
+	let nm = req.body.name,
 		pwd   = req.body.password;
+	try {
+		let suc = await db.login(nm, pwd);
+	} catch (e) {
+		throw 110
+	}
 	
 	//check for user and auth
 	//return good jwt
 	//return no_user error
-});
-
-//CSS
-router.get('/login.css', function(req, res) {
-	console.log("css path")
-	res.sendFile(path.join(curPath+"../../public/stylesheets/login.css"));
 });
 
 module.exports = router;
