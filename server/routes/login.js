@@ -21,6 +21,18 @@ router.post("/", async (req, res, next) => {
 		console.log(usr)
 		if(auth.validateHash(auth.validateHash(usr.hash, usr.salt, usr.iter, req.body.password))) {
 			res.redirect("/status");
+			//! TODO FIX THIS BULLSHIT
+			//
+			// TypeError [ERR_INVALID_ARG_TYPE]: The "password" argument must be of type string or an ins
+			// tance of ArrayBuffer, Buffer, TypedArray, or DataView. Received undefined
+			//     at check (node:internal/crypto/pbkdf2:92:14)
+			//     at Object.pbkdf2Sync (node:internal/crypto/pbkdf2:70:5)
+			//     at auth.validateHash (C:\Users\Dakota\WebstormProjects\usmc_act\server\util\auth.js:21
+			// :22)
+			//     at C:\Users\Dakota\WebstormProjects\usmc_act\server\routes\login.js:22:11
+			//     at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+			//   code: 'ERR_INVALID_ARG_TYPE'
+			// }
 		}
 	} catch (e) {
 		console.error(e)
