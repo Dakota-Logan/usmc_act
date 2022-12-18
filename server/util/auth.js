@@ -1,20 +1,24 @@
 class auth {
-	#db         = require("./db.js");
-	#iterations = 10000;
-	#jwt        = require("jsonwebtoken");
-
+	constructor() {
+		this.iterations = 10000;
+		this.jwt        = require("jsonwebtoken");
+		this.crypto     = require("crypto");
+	}
+	
 	
 	hash(password) {
+		let salt = this.crypto.randomBytes(64).toString("base64");
 		return {
-			salt: crypto.randomBytes(128).toString("base64"),
-			iter: this.#iterations,
-			hash: crypto.pbkdf2(password, this.salt, this.#iterations, 64, "sha512").toString("base64")
+			salt,
+			iter: this.iterations,
+			hash: this.crypto.pbkdf2Sync(password, salt, this.iterations, 64, "sha512").toString("base64")
 		}
 	}
 	
 	
 	validateHash(savedHash, savedSalt, savedIterations, passwordAttempt) {
-		return savedHash === crypto.pbkdf2(passwordAttempt, savedSalt, savedIterations).toString("base64");
+		// return
+		return this.crypto.pbkdf2Sync(passwordAttempt, savedSalt, savedIterations, 64, "sha512").toString("base64") === savedHash;
 	}
 }
 

@@ -61,7 +61,7 @@ app.use("/roster", ((req, res, next) => {
 	if (req.body.clearanceLevel < 3) throw { code: 113 }; else next()
 }), rosterRouter);
 
-//?TODO Add middleware to re-sign jwt.
+//?TODO Add middleware to re-sign jwt. --- Outdated ---
 
 //* catch 404 and forward to error handler
 app.use((req, res, next) => {
