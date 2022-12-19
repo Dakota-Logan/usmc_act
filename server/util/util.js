@@ -8,14 +8,11 @@ class utils {
 	
 	setCookie(res, key, val) {
 		try {
-			res.cookie(key.toString(), val.toString(), /*{ signed: true, secure: true, sameSite: "strict" }*/)
+			res.cookie(key.toString(), val.toString(), { signed: false, secure: false });
 		} catch (e) {
+			console.error(e);
 			throw { code: 193 }
 		}
-	}
-	
-	getCookie (req) {
-		return req.cookies();
 	}
 	
 }

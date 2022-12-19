@@ -31,28 +31,24 @@ app.use(parser.urlencoded({ extended: false }))
 app.use(parser.json());
 app.use(express.json());
 
-// app.use((req, res, next) => {
-// 	let token = req.cookies.token | false;
-// 	if (token) {
-// 		if (jwt.verifyToken(token)) {
-// 			//* Get and set the important information into the body of the request.
-// 			let dToken              = jwt.decodeToken(token);
-// 			req.body.clearanceLevel = dToken.clearanceLevel;
-// 			req.body.userId         = dToken.id;
-//
-// 			//* Redirect to status page as jwt is legitimate.
-// 			res.redirect("/status");
-// 		}
-// 	} else {
-// 		console.log("no jwt") //todo!
-// 		next()
-// 	}
-// });
-
-
-//?TODO Add middleware to replace signed JWT with a decoded JWT object for ease of use through the routes.
-
-// app.use((req => console.log(req.body)));
+app.use((req, res, next) => {
+	let token = req.cookies.jwt || false;
+	console.log(jwt.verifyToken(token))
+	if (jwt.verifyToken(token)) {
+		//*	 Get and set the important information into the body of the request.
+		let dToken      = jwt.decodeToken(token);
+		req.body.admin  = dToken.admin;
+		req.body.userId = dToken.id;
+		
+		//* Redirect to status page as jwt is legitimate.
+		if (req.body.admin) res.redirect("/roster");
+		else res.redirect("/status");
+		
+	} else {
+		console.log("no jwt") //todo!
+		next()
+	}
+});
 
 //* ROUTES
 app.use("/", loginRouter);

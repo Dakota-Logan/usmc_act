@@ -4,7 +4,7 @@ class jwt_utils {
 	createToken(data) {
 		try {
 			return this.jwt.sign({
-				data: { clearanceLevel: data["clearanceLevel"] || 0, id: data.id }
+				data: { admin: data.admin || 0, id: data.id }
 			}, process.env.secret, { expiresIn: "12h", algorithm: "HS256" });
 		} catch (e) {
 			throw { code: 192 }
@@ -26,10 +26,6 @@ class jwt_utils {
 			throw { code: 194 }
 		}
 	}
-	
-	// findClearance(token) {
-	// 	return this.jwt.decode(token).payload["clearanceLevel"];
-	// }
 	
 	decodeError(e) {
 		let res = JSON.parse(new Error(JSON.stringify({ code: "192" })).message)

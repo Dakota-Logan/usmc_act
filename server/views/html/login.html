@@ -57,7 +57,9 @@
 				name: vals.name.value,
 				password: vals.password.value
 			})
-		});
+		}).then((res) => {
+			window.location.assign(res.url)
+		})
 	}
 </script>
 </body>
