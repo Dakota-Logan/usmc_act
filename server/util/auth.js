@@ -27,6 +27,32 @@ class auth {
 			console.error(e);
 		}
 	}
+	
+	authenticate(req, res, next, au = false) {
+		let token = req.cookies.jwt || false;
+		
+		if (!(token && jwt.verifyToken(token))) {
+			console.log("no jwt")
+			let e = {statusCode: 401}
+			throw e;
+		}
+		//*	 Get and set the important information into the body of the request.
+		let dToken      = jwt.decodeToken(token);
+		req.body.admin  = dToken.data.admin;
+		req.body.userId = dToken.data.id;
+		if (!au) next();
+	}
+	
+	authorize(req, res, next) {
+		this.authenticate(req, res, next)
+		if (req.body.admin !== true) {
+			console.log("no jwt")
+			let e        = new Error()
+			e.statusCode = 401;
+			throw e
+		} else next();
+	}
 }
+
 
 module.exports = new auth();

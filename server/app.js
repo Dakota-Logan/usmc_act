@@ -31,33 +31,13 @@ app.use(parser.urlencoded({ extended: false }))
 app.use(parser.json());
 app.use(express.json());
 
-app.use((req, res, next) => {
-	let token = req.cookies.jwt || false;
-	console.log(jwt.verifyToken(token))
-	if (jwt.verifyToken(token)) {
-		//*	 Get and set the important information into the body of the request.
-		let dToken      = jwt.decodeToken(token);
-		req.body.admin  = dToken.admin;
-		req.body.userId = dToken.id;
-		
-		//* Redirect to status page as jwt is legitimate.
-		if (req.body.admin) res.redirect("/roster");
-		else res.redirect("/status");
-		
-	} else {
-		console.log("no jwt") //todo!
-		next()
-	}
-});
+//* JWT Parser
+
 
 //* ROUTES
 app.use("/", loginRouter);
-app.use("/status", statusRouter);
-app.use("/roster", ((req, res, next) => {
-	if (req.body.clearanceLevel < 3) throw { code: 113 }; else next()
-}), rosterRouter);
-
-//?TODO Add middleware to re-sign jwt. --- Outdated ---
+app.use("/status", auth.authenticate, statusRouter);
+app.use("/roster" , auth.authorize, rosterRouter);
 
 //* catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -66,6 +46,9 @@ app.use((req, res, next) => {
 
 //* error handler
 app.use(function (err, req, res) {
+	console.log(err)
+	if(err.statusCode = 401)
+		req.redirect("/")
 	// set locals, only providing error in development
 	res["locals"].message = err.message;
 	res["locals"].error   = req.app.get("env") === "development" ? err : {};

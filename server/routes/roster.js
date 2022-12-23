@@ -3,10 +3,11 @@ const express = require('express'),
 	  // db      = require("./db.js"),
 
 let path = require("path"),
-	curPath = __dirname + "/../views/html/";
+	curPath = __dirname + "/../views/html";
 
 router.get('/', ( req, res, next ) => {
-	res.sendFile(path.join(curPath+"roster.html"));
+	console.log("curPath")
+	res.sendFile(path.join(curPath+"/roster.html"));
 });
 
 /* ! change da pw

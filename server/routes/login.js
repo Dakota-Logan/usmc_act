@@ -13,7 +13,6 @@ router.get('/', (req, res) => {
 	res.sendFile(path.join(curPath + "/login.html"));
 });
 
-//todo Add the pathing that pushes admin users to the roster page immediately.
 router.post("/", async (req, res, next) => {
 	let nm = req.body.name;
 	try {
@@ -21,7 +20,8 @@ router.post("/", async (req, res, next) => {
 			db.retrieveUser(nm)).rows[0];
 		if (auth.validateHash(usr.hash, usr.salt, usr.iter, req.body.password)) {
 			util.setCookie(res, "jwt", jwt.createToken({ admin: usr.admin || 0, id: usr.id }));
-			res.redirect("/status");
+			if(!usr.admin) res.redirect("/status")
+			else res.redirect("/roster");
 		}
 	} catch (e) {
 		if(e.code !== 193) next(110)
