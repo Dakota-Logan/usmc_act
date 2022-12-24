@@ -9,8 +9,7 @@ const loginRouter  = require("./routes/login"),
 	  statusRouter = require("./routes/check_in"),
 	  rosterRouter = require("./routes/roster");
 
-const auth = require("./util/auth"),
-	  jwt  = require("./util/jwt_utils");
+const auth = require("./util/auth.js");
 
 
 let app = express();
@@ -34,10 +33,13 @@ app.use(express.json());
 //* JWT Parser
 
 
+crypto   = require("crypto");
+jwtUtils = require("./util/jwt_utils.js");
+
 //* ROUTES
 app.use("/", loginRouter);
 app.use("/status", auth.authenticate, statusRouter);
-app.use("/roster" , auth.authorize, rosterRouter);
+app.use("/roster", auth.authenticate, auth.authorize, rosterRouter);
 
 //* catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -46,7 +48,7 @@ app.use((req, res, next) => {
 
 //* error handler
 app.use(function (err, req, res) {
-	console.log(err)
+	// console.log(err)
 	if(err.statusCode = 401)
 		req.redirect("/")
 	// set locals, only providing error in development

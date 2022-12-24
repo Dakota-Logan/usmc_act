@@ -1,21 +1,16 @@
 class auth {
-	crypto = require("crypto");
-	jwt    = require("jsonwebtoken");
-	
-	constructor() {
-		this.iterations = 10000;
-	}
+	crypto   = require("crypto");
+	jwtUtils = require("./jwt_utils.js");
 	
 	
 	hash(pw) {
 		let salt = this.crypto.randomBytes(64).toString("base64");
 		return {
 			salt,
-			iter: this.iterations,
+			iter: Math.abs(Math.floor(Math.random() * (100 - 100000) + 100)),
 			hash: this.crypto.pbkdf2Sync(pw, salt, this.iterations, 64, "sha512").toString("base64")
 		}
 	}
-	
 	
 	validateHash(savedHash, savedSalt, savedIterations, passwordAttempt) {
 		// return
@@ -28,23 +23,22 @@ class auth {
 		}
 	}
 	
-	authenticate(req, res, next, au = false) {
+	authenticate(req, res, next) {
 		let token = req.cookies.jwt || false;
 		
-		if (!(token && jwt.verifyToken(token))) {
+		if (!(token && jwtUtils.verifyToken(token))) {
 			console.log("no jwt")
-			let e = {statusCode: 401}
+			let e = { statusCode: 401 }
 			throw e;
 		}
 		//*	 Get and set the important information into the body of the request.
-		let dToken      = jwt.decodeToken(token);
+		let dToken      = jwtUtils.decodeToken(token);
 		req.body.admin  = dToken.data.admin;
 		req.body.userId = dToken.data.id;
-		if (!au) next();
+		next();
 	}
 	
 	authorize(req, res, next) {
-		this.authenticate(req, res, next)
 		if (req.body.admin !== true) {
 			console.log("no jwt")
 			let e        = new Error()
