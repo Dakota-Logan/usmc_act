@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="../../public/stylesheets/login.css">
+	<link rel="stylesheet" href="/stylesheets/login.css">
 	<title>Login</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+	
 	<!-- <div class="topnav" id="myTopnav">
 		<a href="home.html" class="active">Home</a>
 		<a href="admin.html">Admin</a>
@@ -15,34 +15,53 @@
 	  </div> -->
 </head>
 <body>
-	<span id="time"> </span>
-	<!-- This is the login box, make it look like one. -->
-	<div id="loginbox">
-		<form>
-			<label for="name">Name</label>
-			<input type="text" name="name" id="name" placeholder="Username">
-			
-			<label for="secret">Password</label>
-			<input type="password" name="secret" id="password" placeholder="Password">
+<span id="time"> </span>
+<!-- This is the login box, make it look like one. -->
+<div id="login_box">
+	<form id="login_form">
+		<label for="name">Name</label>
+		<input type="text" name="name" id="name" placeholder="Username">
+		
+		<label for="secret">Password</label>
+		<input type="password" name="secret" id="password" placeholder="Password">
+		
+		<button name="button" id="button">Submit</button>
+	</form>
+</div>
 
-			<button name="button" id="button">Submit</button>
-		</form>
-	</div>
-
-	<script type="text/javascript" async>
-		`use strict`
-	   var datetime = new Date();
-	   console.log(datetime);
-	   document.getElementById("time").textContent = datetime; //it will print on html page
-	   
-	   function refreshTime() {
-	   const timeDisplay = document.getElementById("time");
-	   const dateString = new Date().toLocaleString();
-	   const formattedString = dateString.replace(", ", " - ");
-	   timeDisplay.textContent = formattedString;
-	   }
-	   setInterval(refreshTime, 1000);
-   </script>
+<script type="text/javascript" async>
+	`use strict`
+	let datetime = new Date();
+	console.log(datetime);
+	document.getElementById("time").textContent = datetime.toDateString(); //it will print on html page
+	
+	function refreshTime() {
+		const timeDisplay       = document.getElementById("time");
+		const dateString        = new Date().toLocaleString();
+		const formattedString   = dateString.replace(", ", " - ");
+		timeDisplay.textContent = formattedString;
+	}
+	
+	setInterval(refreshTime, 1000);
+	
+	document.getElementById("login_form").addEventListener("submit", login, true);
+	function login (e) {
+		e.preventDefault();
+		let vals = e.target.elements;
+		fetch("/", {
+			method: "POST",
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				name: vals.name.value,
+				password: vals.password.value
+			})
+		}).then((res) => {
+			window.location.assign(res.url)
+		})
+	}
+</script>
 </body>
 
 

@@ -1,61 +1,67 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Home</title>
-    <link rel="stylesheet" href="./../../public/stylesheets/primary.css">
-  </head>
-  <body>
-    <!-- This is the page where you can log-in|log-out. See image "signal-2022..." for hand-drawn diagram (will be updated). -->
-    <div id="operationscontainer">
-      <div id="sign-in" class="split left">
-        <div class="centered">
-          <button type="submit" class="block">Sign In</button>
-        </div>
-        <!-- show time and have button for check-in -->
-      </div>
-
-      <div id="sign-out" class="split right">
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" href="stylesheets/primary.css">
+</head>
+<body>
+<!-- This is the page where you can log-in|log-out. See image "signal-2022..." for hand-drawn diagram (will be updated). -->
+<div id="operationscontainer">
+	<div id="sign-in" class="split left">
+		<div class="centered">
+			<button type="submit" class="block">Sign In</button>
+		</div>
+		<!-- show time and have button for check-in -->
+	</div>
+	
+	<div id="sign-out" class="split right">
 		<div class="centered">
 			<!-- give them a drop-down list to select generic reasons (like checking out, duty recovery, TAD, etc.) -->
 			<!--also allow for text input via <input type="textarea"> or similar. -->
 			<label for="options">Choose an option to checkout with:</label>
 			<select name="reasons" id="reasons">
-			<option value="checkingout">Checking Out</option>
-			<option value="dutyrecovery">Duty Recovery</option>
-			<option value="duty">Duty</option>
-			<!-- <option value=""></option><option value=""></option><option value=""></option><option value=""></option> -->
-			<option value="other">Other, specify below</option>
-
-			<div style="text-align:right; visibility: hidden;">
-				<span style="font-weight:bold;" id="counter"></span>
-				<textarea id="showthis" class="hide" placeholder="Reason in here" cols="28" rows="5" style="visibility: hidden;"></textarea>
-			</div>
-			<button type="submit" class="block">Sign Out</button>
-			<!-- <input type="submit" value="Submit"> -->
+				<option value="checkingout">Checking Out</option>
+				<option value="dutyrecovery">Duty Recovery</option>
+				<option value="duty">Duty</option>
+				<!-- <option value=""></option><option value=""></option><option value=""></option><option value=""></option> -->
+				<option value="other">Other, specify below</option>
+				
+				<div style="text-align:right; visibility: hidden;">
+					<span style="font-weight:bold;" id="counter"></span>
+					<textarea id="showthis" class="hide" placeholder="Reason in here" cols="28" rows="5" style="visibility: hidden;"></textarea>
+				</div>
+				<button type="submit" class="block">Sign Out</button>
+				<!-- <input type="submit" value="Submit"> -->
 			</select>
 		</div>
 	</div>
 </div>
 
-    <script>
-      let reasons = document.querySelector("#reasons"),
-        showthis = document.querySelector("#showthis");
-      reasons.addEventListener("change", () => {
-        if (reasons.value == "other") showthis.style = "visibility: visible"
-        else showthis.style = "visibility: hidden"
-      })
+<script>
+	let reasons  = document.querySelector("#reasons"),
+		showthis = document.querySelector("#showthis");
+	reasons.addEventListener("change", () => {
+		if (reasons.value == "other") showthis.style = "visibility: visible"
+		else showthis.style = "visibility: hidden"
+	})
+	
+	function myfunc2() {
+		var selectedobj = document.getElementById('showthis');
+		if (selectedobj.className == 'hide') { //check if classname is hide
+			selectedobj.style.display = "block";
+			selectedobj.className     = 'hide';
+		} else {
+			4
+			selectedobj.style.display = "none";
+			selectedobj.className     = 'hide';
+		}
+	}
 
-      function myfunc2() {
-        var selectedobj = document.getElementById('showthis');
-        if (selectedobj.className == 'hide') { //check if classname is hide 
-          selectedobj.style.display = "block";
-          selectedobj.className = 'hide';
-        } else {
-          4
-          selectedobj.style.display = "none";
-          selectedobj.className = 'hide';
-        }
-      }
-    </script>
-  </body>
+	function updateUser (e) {
+		e.preventDefault();
+		
+		console.log(e.target);
+	}
+</script>
+</body>
 </html>
