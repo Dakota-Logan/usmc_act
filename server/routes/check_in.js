@@ -1,17 +1,23 @@
-const express = require('express'),
-	  router  = express.Router();
+const express = require("express"),
+	  router  = express.Router(),
+	  db = require("../util/db");
 
-let path      = require("path"),
-	curPath   = __dirname + "/../views/html";
+let path    = require("path"),
+	curPath = __dirname + "/../views/html";
 
 
-router.get('/', (req, res, next) => {
-console.log("inside check_in.js GET")
-	
-	res.sendFile(path.join(curPath+"/checkin.html"));
+router.get("/", (req, res) => {
+	res.sendFile(path.join(curPath + "/checkin.html"));
 });
 
-router.post("/checkin")
-router.post("/checkout")
+router.post("/checkin", (req, res) => {
+	console.log(req.body.userId);
+	db.check_in(req.body.userId)
+});
+
+router.post("/checkout", ((req, res) => {
+	let curTime = time(new Date())
+	console.log(req.body)
+}))
 
 module.exports = router;

@@ -8,31 +8,33 @@
 <!-- This is the page where you can log-in|log-out. See image "signal-2022..." for hand-drawn diagram (will be updated). -->
 <div id="operationscontainer">
 	<div id="sign-in" class="split left">
-		<div class="centered">
+		<form  id="signIn" class="centered">
 			<button type="submit" class="block">Sign In</button>
-		</div>
+		</form>
 		<!-- show time and have button for check-in -->
 	</div>
 	
 	<div id="sign-out" class="split right">
 		<div class="centered">
-			<!-- give them a drop-down list to select generic reasons (like checking out, duty recovery, TAD, etc.) -->
-			<!--also allow for text input via <input type="textarea"> or similar. -->
-			<label for="options">Choose an option to checkout with:</label>
-			<select name="reasons" id="reasons">
-				<option value="checkingout">Checking Out</option>
-				<option value="dutyrecovery">Duty Recovery</option>
-				<option value="duty">Duty</option>
-				<!-- <option value=""></option><option value=""></option><option value=""></option><option value=""></option> -->
-				<option value="other">Other, specify below</option>
-				
-				<div style="text-align:right; visibility: hidden;">
-					<span style="font-weight:bold;" id="counter"></span>
-					<textarea id="showthis" class="hide" placeholder="Reason in here" cols="28" rows="5" style="visibility: hidden;"></textarea>
-				</div>
+			<form id="signOut">
+				<!-- give them a drop-down list to select generic reasons (like checking out, duty recovery, TAD, etc.) -->
+				<!--also allow for text input via <input type="textarea"> or similar. -->
+				<label for="options">Choose an option to checkout with:</label>
+				<select name="reasons" id="reasons">
+					<option value="checkingout">Checking Out</option>
+					<option value="dutyrecovery">Duty Recovery</option>
+					<option value="duty">Duty</option>
+					<!-- <option value=""></option><option value=""></option><option value=""></option><option value=""></option> -->
+					<option value="other">Other, specify below</option>
+					
+					<div style="text-align:right; visibility: hidden;">
+						<span style="font-weight:bold;" id="counter"></span>
+						<textarea id="showthis" class="hide" placeholder="Reason in here" cols="28" rows="5" style="visibility: hidden;"></textarea>
+					</div>
+					<!-- <input type="submit" value="Submit"> -->
+				</select>
 				<button type="submit" class="block">Sign Out</button>
-				<!-- <input type="submit" value="Submit"> -->
-			</select>
+			</form>
 		</div>
 	</div>
 </div>
@@ -56,11 +58,37 @@
 			selectedobj.className     = 'hide';
 		}
 	}
-
-	function updateUser (e) {
+	
+	document.getElementById("signIn").addEventListener("submit", checkin, true);
+	function checkin(e) {
 		e.preventDefault();
+		console.log("askdjfla")
+		fetch("/status/checkin", {
+			method: "POST",
+			headers: { "Content-Type": "none" }
+		}).then((res) => {
+			console.log("CHECKED IN", res.status, res.statusText)
+		})
+		
 		
 		console.log(e.target);
+	}
+	
+	document.getElementById("signOut").addEventListener("submit", checkout, true);
+	function checkout(e) {
+		e.preventDefault();
+		console.log(e.target.reasons.value)
+		console.log("askdjfla")
+		fetch("/status/checkout", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				reason: e.target.reasons.value,
+				explanation: e.target.showthis.value || "N/A"
+			})
+		}).then((res) => {
+			console.log("CHECKED OUT", res.status, res.statusText)
+		})
 	}
 </script>
 </body>

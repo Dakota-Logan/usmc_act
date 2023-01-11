@@ -10,6 +10,18 @@ class deltaBravo {
 		this.client.connect()
 	}
 	
+	
+	options = {
+		timeZone: "EST",
+		year: "numeric",
+		month: "numeric",
+		day: "numeric",
+		hour: "numeric",
+		minute: "numeric",
+		hour12: false
+	}
+	time    = new Intl.DateTimeFormat([], this.options).format;
+	
 	//? This is a parameterized query, which runs the variables as parameters so any hidden injection wont be run as postgres code. Neat lil feature I just found.
 	
 	async retrieveUser(name) {
@@ -32,7 +44,8 @@ class deltaBravo {
 	}
 	
 	async check_in(id) {
-	
+		let checkInTime = this.time(new Date());
+		let text = "UPDATE "
 	}
 	
 	async check_out(id, reason) {
