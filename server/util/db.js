@@ -3,14 +3,6 @@ const { Client } = require('pg');
 
 //* Using a class to easily export into other file for use, good practice with classes.
 class deltaBravo {
-	constructor() {
-		//* Connect to the database with the interface.
-		
-		this.client = new Client({ connectionString: process.env.db })
-		this.client.connect()
-	}
-	
-	
 	options = {
 		timeZone: "EST",
 		year: "numeric",
@@ -21,6 +13,13 @@ class deltaBravo {
 		hour12: false
 	}
 	time    = new Intl.DateTimeFormat([], this.options).format;
+	
+	constructor() {
+		//* Connect to the database with the interface.
+		
+		this.client = new Client({ connectionString: process.env.db })
+		this.client.connect()
+	}
 	
 	//? This is a parameterized query, which runs the variables as parameters so any hidden injection wont be run as postgres code. Neat lil feature I just found.
 	
@@ -36,16 +35,23 @@ class deltaBravo {
 	
 	async changePassword(id, parts) {
 		let [f, l] = id.split(".");
-		if(f && l) {
-			let text = "UPDATE user_tracker SET hash = $3, salt = $4, iter = $5 WHERE first = $1 AND last = $2",
+		if (f && l) {
+			let text   = "UPDATE user_tracker SET hash = $3, salt = $4, iter = $5 WHERE first = $1 AND last = $2",
 				values = [f, l, parts.hash, parts.salt, parts.iter]
-			return await this.client.query({text, values})
+			return await this.client.query({ text, values })
 		}
 	}
 	
 	async check_in(id) {
 		let checkInTime = this.time(new Date());
-		let text = "UPDATE "
+		//! LOOK AT ERROR IN CONSOLE - THIS IS AFTER CLICKING THE SIGN_IN BUTTON.
+		let text        = 'UPDATE user_tracker SET "in" = TRUE, reason = "N/A", last_date = $1 WHERE id = $2;'
+			, values    = [checkInTime, id];
+		try {
+			return await this.client.query({ text, values });
+		}catch (e) {
+			console.error(e);
+		}
 	}
 	
 	async check_out(id, reason) {
