@@ -45,11 +45,11 @@ class deltaBravo {
 	async check_in(id) {
 		let checkInTime = this.time(new Date());
 		//! LOOK AT ERROR IN CONSOLE - THIS IS AFTER CLICKING THE SIGN_IN BUTTON.
-		let text        = 'UPDATE user_tracker SET "in" = TRUE, reason = "N/A", last_date = $1 WHERE id = $2;'
-			, values    = [checkInTime, id];
+		let text        = 'UPDATE user_tracker\nSET "in" = $1, last_date = $2,  reason = $3 \nWHERE id = $4;'
+			, values    = [true, checkInTime, "N/A", id];
 		try {
 			return await this.client.query({ text, values });
-		}catch (e) {
+		} catch (e) {
 			console.error(e);
 		}
 	}
