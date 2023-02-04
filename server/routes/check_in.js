@@ -16,8 +16,7 @@ router.post("/checkin", (req, res) => {
 });
 
 router.post("/checkout", ((req, res) => {
-	let curTime = time(new Date())
-	console.log(req.body)
+	db.check_out(req.body.userId, req.body.reason, req.body.explaination);
 }))
 
 module.exports = router;
