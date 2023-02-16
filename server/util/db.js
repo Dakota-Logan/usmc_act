@@ -10,7 +10,7 @@ class deltaBravo {
 		this.client.connect()
 	}
 	
-	//? This is a parameterized query, which runs the variables as parameters so any hidden injection wont be run as postgres code. Neat lil feature I just found.
+	//? This is a parameterized query, which runs the variables as parameters so any hidden injection wont be run as postgres code.
 	
 	async retrieveUser(name) {
 		//todo need [hash, salt, iter]
@@ -40,7 +40,11 @@ class deltaBravo {
 	}
 	
 	async roster() {
-	
+		try {
+			return await this.client.query("SELECT * FROM user_tracker");
+		} catch (e) {
+			console.error(e);
+		}
 	}
 }
 

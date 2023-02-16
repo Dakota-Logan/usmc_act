@@ -1,7 +1,22 @@
 doctype html
-html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+html(lang="en")
+	head
+		title="Roster"
+		link(rel='stylesheet', href='/stylesheets/secondary.css')
+	body
+		table
+			thead
+				tr
+					th Rank
+					th Last
+					th First
+					th Status
+					th Comment
+			tbody
+			each user in users
+				tr
+					th #{user.rank}
+					th #{user.last}
+					th #{user.first}
+					th #{user.in}
+					th #{user.reason}
