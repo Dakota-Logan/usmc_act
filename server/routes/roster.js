@@ -1,17 +1,18 @@
 const express = require('express'),
-	  router  = express.Router();
-	  // db      = require("./db.js"),
+	  router  = express.Router(),
+	  db      = require("./../util/db");
 
 let path = require("path"),
 	curPath = __dirname + "/../views/html";
 
-router.get('/', ( req, res, next ) => {
-	console.log("curPath")
-	res.sendFile(path.join(curPath+"/roster.html"));
+router.get('/', async ( req, res, next ) => {
+	let users = (await db.roster()).rows;
+	console.log(users[0])
+	res.render(path.join(curPath+"/../roster.pug"), { users });
 });
 
-/* ! change da pw
-router.post("/x", async (req, res) => {
+
+router.post("/update", async (req, res) => {
 	let [f, l] = req.body.name.split(".");
 	if(!req.body.password) throw 491;
 	let hashNshit = auth.hash(req.body.password);
@@ -21,6 +22,6 @@ router.post("/x", async (req, res) => {
 		//prolly figure out my legit error handling shitchiachon
 		console.log("error");
 	}
-}) */
+});
 
 module.exports = router;

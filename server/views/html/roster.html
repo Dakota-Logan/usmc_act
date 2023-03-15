@@ -18,20 +18,6 @@
 			<th>Status</th>
 			<th>Comment</th>
 		</tr>
-		<tr>
-			<td>LCPL</td>
-			<td>Polevoy </td>
-			<td>Azaria</td>
-			<td>Out</td>
-			<td>Eating the moon</td>
-		</tr>
-		<tr>
-			<td>TSGT</td>
-			<td>Logan</td>
-			<td>Dakota</td>
-			<td>IN</td>
-			<td>Shop</td>
-		</tr>
 	</table>
 </div>
 
@@ -44,7 +30,39 @@
 
 <!-- Put your javascript (for loading widget) in here! may be moved out-file later -->
 <script type="text/javascript" async>
-
+	
+	document.getElementById("").addEventListener("submit", checkout, true);
+	function checkout(e) {
+		e.preventDefault();
+		("/roster", {
+			method: "GET",
+			headers: {}
+		}).then((res) => {
+			console.log("Roster GET completed", res.status, res.statusText)
+		})
+	}
+	
+/* *example data:
+76e00fa2-0545-54c3-2386-0772d16e8ee2,
+LCpl,
+dakota,
+logan,
+false,
+dutyrecovery,
+true,
+	w5179qlqvDhcpxmyNnP1vWL1KZYS6UarsauUktUb1ZKgt3B/HTR18Pkq2TGqndwbOP4buHDzPZ3ODsmzm7FebQ==,pU3G5cYSY++E9zEPI/bppDs9IdcB46NiwJrclHs9nMd4ZVzWA6xdFZjp25Ak0PamscpSUdYYup45v7x2DQdJiA==,10000,"2/4/2023, 15:50",lorem ipsum
+*/
+	
+	function fillRoster (data) {
+		<tr>
+			<th>Rank</th>
+			<th>Last </th>
+			<th>First</th>
+			<th>Status</th>
+			<th>Comment</th>
+		</tr>
+	}
+	
 </script>
 
 </body>
