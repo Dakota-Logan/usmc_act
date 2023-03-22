@@ -3,12 +3,12 @@ const express = require('express'),
 	  db      = require("./../util/db");
 
 let path = require("path"),
-	curPath = __dirname + "/../views/html";
+	htmlPath = __dirname + "/../views/html";
 
 router.get('/', async ( req, res, next ) => {
 	let users = (await db.roster()).rows;
 	console.log(users[0])
-	res.render(path.join(curPath+"/../roster.pug"), { users });
+	res.sendFile(path.join(htmlPath + "/roster.html"));
 });
 
 
