@@ -2,7 +2,8 @@ doctype html
 html(lang="en")
 	head
 		title="Roster"
-		link(rel='stylesheet', href='/stylesheets/secondary.css')
+		link(rel="stylesheet", href="/stylesheets/secondary.css")
+		script(src="/javascripts/roster.js")
 	body
 		table
 			thead
@@ -15,6 +16,8 @@ html(lang="en")
 			tbody
 			each user in users
 				tr
+					td
+						a(onclick="editUser(#{user})") Edit
 					td #{user.rank}
 					td #{user.last}
 					td #{user.first}

@@ -23,34 +23,40 @@
 
 <script type="text/javascript" async>
 
-    document.getElementById("").addEventListener("submit", checkout, true);
+	document.getElementById("").addEventListener("submit", checkout, true);
 
-    function checkout(e) {
-        e.preventDefault();
-        ("/roster", {
-            method: "GET",
-            headers: {}
-        }).then((res) => {
-            console.log("Roster GET completed", res.status, res.statusText)
-        })
-    }
+	function checkout(e) {
+		e.preventDefault();
+		("/roster", {
+			method: "GET",
+			headers: {}
+		}).then((res) => {
+			console.log("Roster GET completed", res.status, res.statusText)
+		})
+	}
 
-    function fillRoster(data) {
-        `
+	function fillRoster(data) {
+		let formated = (user) => {
+			return `
+
+            `
+		}
+
+		`
 		<tr>
 		    <td><a onclick="editUser(data)">Edit</a></td>
-			<th>Rank</th>
+			<th></th>
 			<th>Last </th>
 			<th>First</th>
 			<th>Status</th>
 			<th>Comment</th>
 		</tr>
 		`
-    }
+	}
 
-    function editUser(user){
+	function editUser(user) {
 
-    }
+	}
 </script>
 
 </body>
