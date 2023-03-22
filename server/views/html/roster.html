@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="EN">
 <head>
-	<title>Roster</title>
-	<!-- <link rel="stylesheet" href="./../../public/stylesheets/widget.css"> -->
-	<link rel="stylesheet" href="/stylesheets/secondary.css">
+    <title>Roster</title>
+    <!-- <link rel="stylesheet" href="./../../public/stylesheets/widget.css"> -->
+    <link rel="stylesheet" href="/stylesheets/secondary.css">
 </head>
 <body>
 <!-- Before this table is shown, service will gather the data required  -->
 
 <!-- This is the outline to use for display of the roster, should be pre-rendered at the server. -->
 <div id="roster-container">
-	<table style="width:50%">
-		<tr>
-			<th>Rank</th>			
-			<th>Last </th>
-			<th>First</th>
-			<th>Status</th>
-			<th>Comment</th>
-		</tr>
-	</table>
+    <table style="width:50%">
+        <tr>
+            <th>Rank</th>
+            <th>Last</th>
+            <th>First</th>
+            <th>Status</th>
+            <th>Comment</th>
+        </tr>
+    </table>
 </div>
 
 <!-- Create something to show that data is loading (like one of those spinners). -->
@@ -30,39 +30,46 @@
 
 <!-- Put your javascript (for loading widget) in here! may be moved out-file later -->
 <script type="text/javascript" async>
-	
-	document.getElementById("").addEventListener("submit", checkout, true);
-	function checkout(e) {
-		e.preventDefault();
-		("/roster", {
-			method: "GET",
-			headers: {}
-		}).then((res) => {
-			console.log("Roster GET completed", res.status, res.statusText)
-		})
-	}
-	
-/* *example data:
-76e00fa2-0545-54c3-2386-0772d16e8ee2,
-LCpl,
-dakota,
-logan,
-false,
-dutyrecovery,
-true,
-	w5179qlqvDhcpxmyNnP1vWL1KZYS6UarsauUktUb1ZKgt3B/HTR18Pkq2TGqndwbOP4buHDzPZ3ODsmzm7FebQ==,pU3G5cYSY++E9zEPI/bppDs9IdcB46NiwJrclHs9nMd4ZVzWA6xdFZjp25Ak0PamscpSUdYYup45v7x2DQdJiA==,10000,"2/4/2023, 15:50",lorem ipsum
-*/
-	
-	function fillRoster (data) {
+
+    document.getElementById("").addEventListener("submit", checkout, true);
+
+    function checkout(e) {
+        e.preventDefault();
+        ("/roster", {
+            method: "GET",
+            headers: {}
+        }).then((res) => {
+            console.log("Roster GET completed", res.status, res.statusText)
+        })
+    }
+
+    /* *example data:
+    76e00fa2-0545-54c3-2386-0772d16e8ee2,
+    LCpl,
+    dakota,
+    logan,
+    false,
+    dutyrecovery,
+    true,
+        w5179qlqvDhcpxmyNnP1vWL1KZYS6UarsauUktUb1ZKgt3B/HTR18Pkq2TGqndwbOP4buHDzPZ3ODsmzm7FebQ==,pU3G5cYSY++E9zEPI/bppDs9IdcB46NiwJrclHs9nMd4ZVzWA6xdFZjp25Ak0PamscpSUdYYup45v7x2DQdJiA==,10000,"2/4/2023, 15:50",lorem ipsum
+    */
+
+    function fillRoster(data) {
+        `
 		<tr>
+		    <td><a onclick="editUser(data)">Edit</a></td>
 			<th>Rank</th>
 			<th>Last </th>
 			<th>First</th>
 			<th>Status</th>
 			<th>Comment</th>
 		</tr>
-	}
-	
+		`
+    }
+
+    function editUser(user){
+
+    }
 </script>
 
 </body>
