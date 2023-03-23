@@ -7,33 +7,32 @@
 </head>
 <body>
 <!-- Before this table is shown, service will gather the data required  -->
-
+<%- JSON.stringify(data[0])%><br>
+<%- JSON.stringify(data[1])%><br>
+<%- JSON.stringify(data[2])%><br>
+<%- JSON.stringify(data[3])%><br>
 <!-- This is the outline to use for display of the roster, should be pre-rendered at the server. -->
 <div id="roster-container">
 	<table style="width:50%">
 		<tr>
+            <th></th>
 			<th>Rank</th>
 			<th>Last</th>
 			<th>First</th>
 			<th>Status</th>
+            <th>Reason</th>
 			<th>Comment</th>
+            <th>Last Date</th>
 		</tr>
         <% data.forEach(cur => { %>
-        	<tr>
-                <th>cur.rank</th>
-                <th>cur.last</th>
-                <th>cur.first</th>
-                <th>cur.in</th>
-                <th>cur.reasons</th>
-            </tr>
+            <%- include("./components/user_row.ejs", {user: cur}); %>
         <% }) %>
 	</table>
 </div>
 
 <script async type="text/javascript">
-
-	function editUser(user) {
-
+	function edit(user){
+		console.log(user);
 	}
 </script>
 

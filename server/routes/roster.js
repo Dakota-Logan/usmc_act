@@ -9,7 +9,7 @@ let path = require("path"),
 router.get("/", async (req, res, next) => {
 	let users = (await db.roster()).rows;
 	console.log(users[0])
-	res.render(path.join(viewPath + "roster.ejs"), {data : [{rank: "pfc", last: "logan", first: "dakota", in: true, reason: "N/A"}]});
+	res.render(path.join(viewPath + "roster.ejs"), {data: users});
 });
 
 
