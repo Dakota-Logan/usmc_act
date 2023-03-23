@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="EN">
+<head>
+	<title>Roster</title>
+	<!-- <link rel="stylesheet" href="./../../public/stylesheets/widget.css"> -->
+	<link href="/stylesheets/secondary.css" rel="stylesheet">
+</head>
+<body>
+<!-- Before this table is shown, service will gather the data required  -->
+
+<!-- This is the outline to use for display of the roster, should be pre-rendered at the server. -->
+<div id="roster-container">
+	<table style="width:50%">
+		<tr>
+			<th>Rank</th>
+			<th>Last</th>
+			<th>First</th>
+			<th>Status</th>
+			<th>Comment</th>
+		</tr>
+        <% data.forEach(cur => { %>
+        	<tr>
+                <th>cur.rank</th>
+                <th>cur.last</th>
+                <th>cur.first</th>
+                <th>cur.in</th>
+                <th>cur.reasons</th>
+            </tr>
+        <% }) %>
+	</table>
+</div>
+
+<script async type="text/javascript">
+
+	function editUser(user) {
+
+	}
+</script>
+
+</body>
+</html>

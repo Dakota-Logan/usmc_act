@@ -1,14 +1,15 @@
 const express = require("express"),
 	router = express.Router(),
-	db = require("./../util/db");
+	db = require("./../util/db"),
+	ejs = require("ejs");
 
 let path = require("path"),
-	htmlPath = __dirname + "/../views/html";
+	viewPath = __dirname + "/../views/";
 
 router.get("/", async (req, res, next) => {
 	let users = (await db.roster()).rows;
 	console.log(users[0])
-	res.sendFile(path.join(htmlPath + "/roster.html"));
+	res.render(path.join(viewPath + "roster.ejs"), {data : [{rank: "pfc", last: "logan", first: "dakota", in: true, reason: "N/A"}]});
 });
 
 
