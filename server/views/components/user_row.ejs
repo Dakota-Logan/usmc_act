@@ -14,6 +14,17 @@
             .addEventListener("onclick", edit(<%- JSON.stringify(user) %>))
 
 	function edit(user){
-		console.log(user);
+		e.preventDefault();
+		let vals = e.target.elements;
+		fetch("/", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				name: vals.name.value,
+				password: vals.password.value
+			})
+		})
 	}
 </script>
