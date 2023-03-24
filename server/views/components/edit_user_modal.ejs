@@ -1,0 +1,110 @@
+<div id="modal-1" aria-hidden="true">
+    <div id="modal-1" aria-hidden="true">>
+        <form class="forum-parent">
+            <div class="forum-section">
+                <div class="forum-item">
+                    <label for="id">Id</label>
+                    <input type="text" id="id" name="id" disabled>
+                </div>
+
+                <div class="forum-item">
+                    <label for="rank">Rank</label>
+                    <input type="text" id="rank" name="rank">
+                </div>
+
+                <div class="forum-item">
+                    <label for="first">First</label>
+                    <input type="text" id="first" name="first">
+                </div>
+
+                <div class="forum-item">
+                    <label for="last">Last</label>
+                    <input type="text" id="last" name="last">
+                </div>
+
+                <div class="forum-item">
+                    <label for="in">In</label>
+                    <input type="text" id="in" name="in">
+                </div>
+            </div>
+
+            <div id="submit-container" class="forum-section">
+                <button id="sumbit" type="submit" style="width: 75px;">SUBMIT</button>
+            </div>
+
+            <div class="forum-section">
+                <div class="forum-item">
+                    <label for="reason">Reason</label>
+                    <input type="text" id="reason" name="reason">
+                </div>
+
+                <div class="forum-item">
+                    <label for="admin">Admin</label>
+                    <input type="text" id="admin" name="admin">
+                </div>
+
+                <div class="forum-item">
+                    <label for="last_date">Time of last checkin</label>
+                    <input type="text" id="last_date" name="last_date">
+                </div>
+
+                <div class="forum-item">
+                    <label for="explanation">Explanation</label>
+                    <input type="text" id="explanation" name="explanation">
+                </div>
+
+                <div class="forum-item">
+                    <label for="pw">Password</label>
+                    <input type="password" id="pw" name="pw">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!--TODO -->
+<style>
+	.forum-parent {
+		display: flex;
+		flex-direction: row;
+		height: 98%;
+		width: 100%;
+	}
+
+	.forum-section {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		align-content: space-evenly;
+		width: 33%;
+		height: 100%;
+	}
+
+	.forum-item {
+		width: 25vw;
+		margin: 0 auto 0;
+		display: flex;
+		flex-direction: column;
+	}
+
+	#submit-container {
+		display: flex;
+		justify-content: end;
+		align-content: center;
+	}
+
+	#sumbit {
+		margin: 0 auto 0;
+	}
+</style>
+
+<script>
+	document.getElementById("sumbit").addEventListener("submit", modalForm);
+
+	function modalForm(e) {
+		e.preventDefault();
+		let values = e.target.elements;
+		console.log(values)
+	}
+</script>
