@@ -4,8 +4,18 @@
 	<title>Roster</title>
 	<!-- <link rel="stylesheet" href="./../../public/stylesheets/widget.css"> -->
 	<link href="/stylesheets/secondary.css" rel="stylesheet">
+	<link href="../../node_modules/tingle.js/dist/tingle.css" rel="stylesheet">
 </head>
 <body>
+
+<div id="modal-insert" style="display: ;">
+	<%- include("./components/edit_user_modal.ejs") %>
+</div>
+
+
+<h2>this is a test</h2>
+
+<h3>this is a test</h3>
 
 <div id="roster-container">
 	<table style="width:50%">
@@ -29,6 +39,7 @@
 	function edit(user){
 		console.log(user);
 	}
+
 </script>
 
 </body>
