@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="start" type="js.build_tools.npm" nameIsGenerated="true">
+    <package-json value="$PROJECT_DIR$/server/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="start" />
+    </scripts>
+    <node-interpreter value="project" />
+    <envs>
+      <env name="db" value="postgres://fmzxskqr:ILtMcIZDY6gNTkmyQvJ9IApXSBzmnQF8@peanut.db.elephantsql.com/fmzxskqr" />
+      <env name="secret" value="5943A2F7676D4ED398A34C1D99322" />
+      <env name="PGUSER" value="fmzxskqr" />
+      <env name="PGPASSWORD" value="ILtMcIZDY6gNTkmyQvJ9IApXSBzmnQF8" />
+      <env name="PGDATABASE" value="fmzxskqr" />
+      <env name="PGHOST" value="peanut.db.elephantsql.com" />
+      <env name="PGPORT" value="5432" />
+    </envs>
+    <method v="2" />
+  </configuration>
+</component>

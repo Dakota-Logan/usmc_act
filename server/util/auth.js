@@ -27,9 +27,7 @@ class auth {
 		let token = req.cookies.jwt || false;
 		
 		if (!(token && jwtUtils.verifyToken(token))) {
-			console.log("no jwt")
-			let e = { statusCode: 401 }
-			throw e;
+			res.redirect("/");
 		}
 		//*	 Get and set the important information into the body of the request.
 		let dToken      = jwtUtils.decodeToken(token);
@@ -40,10 +38,7 @@ class auth {
 	
 	authorize(req, res, next) {
 		if (req.body.admin !== true) {
-			console.log("no jwt")
-			let e        = new Error()
-			e.statusCode = 401;
-			throw e
+			res.redirect("/status");
 		} else next();
 	}
 }

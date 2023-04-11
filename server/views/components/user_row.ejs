@@ -1,0 +1,30 @@
+<tr>
+    <td><a id="<%- user.rank + user.first + user.last %>">Edit</a></td>
+    <td><%- user.rank %></td>
+    <td><%- user.last %></td>
+    <td><%- user.first %></td>
+    <td><%- user.in %></td>
+    <td><%- user.reason %></td>
+    <td><%- user.explaination %></td>
+    <td><%- user.last_date %></td>
+</tr>
+
+<script type="text/javascript">
+	document.getElementById("<%- user.rank + user.first + user.last %>")
+            .addEventListener("onclick", edit(<%- JSON.stringify(user) %>))
+
+	function edit(user){
+		e.preventDefault();
+		let vals = e.target.elements;
+		fetch("/", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				name: vals.name.value,
+				password: vals.password.value
+			})
+		})
+	}
+</script>

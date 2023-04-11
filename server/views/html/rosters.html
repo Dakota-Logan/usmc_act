@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="EN">
+<head>
+	<title>Roster</title>
+	<!-- <link rel="stylesheet" href="./../../public/stylesheets/widget.css"> -->
+	<link href="/stylesheets/secondary.css" rel="stylesheet">
+</head>
+<body>
+<!-- Before this table is shown, service will gather the data required  -->
+
+<!-- This is the outline to use for display of the roster, should be pre-rendered at the server. -->
+<div id="roster-container">
+	<table style="width:50%">
+		<tr>
+			<th>Rank</th>
+			<th>Last</th>
+			<th>First</th>
+			<th>Status</th>
+			<th>Comment</th>
+		</tr>
+	</table>
+</div>
+
+<script async type="text/javascript">
+	document.onload()
+	function checkout(e) {
+		e.preventDefault();
+		("/roster", {
+			method: "GET",
+			headers: {}
+		}).then((res) => {
+			console.log("Roster GET completed", res.status, res.statusText)
+		})
+	}
+
+	function fillRoster(data) {
+		let formated = (user) => {
+			return `
+		<tr>
+		    <td><a onclick="editUser(data)">Edit</a></td>
+			<th>${user.rank}</th>
+			<th>${user.first} </th>
+			<th>${user.last}</th>
+			<th>${user.in}</th>
+			<th>${user.reasons}</th>
+		</tr>
+			`;
+		}
+		data.forEach(cur => {
+			console.log(cur);
+		})
+	}
+
+	function editUser(user) {
+
+	}
+</script>
+
+</body>
+</html>
